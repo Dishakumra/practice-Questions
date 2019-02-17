@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+//clean == 0 and dirty >=0 and obstacle == -1
+void cleanArray(int **a,int startRow,int startCol,int totalRows,int totalCols)
+{
+	if(startRow>=totalRows || startCol>=totalCols || startCol<0 || startRow<0 )//boundary
+	{
+		return;
+	}
+	else if(a[startRow][startCol] == 0 || a[startRow][startCol]== -1)//processed and obstacle
+	{
+		return;
+	}
+	else
+	{
+		a[startRow][startCol]=0;
+		cleanArray(a,startRow+1,startCol,totalRows,totalCols);
+		cleanArray(a,startRow-1,startCol,totalRows,totalCols);
+		cleanArray(a,startRow,startCol+1,totalRows,totalCols);
+		cleanArray(a,startRow,startCol-1,totalRows,totalCols);
+	}
+}
+int main()
+{
+	int rows,cols;
+	cout<<"ENTER ROWS AND COLS: ";
+	cin>>rows>>cols;
+	int **a=new int*[rows];
+	cout<<"ENTER DATA : \n";
+	for(int i=0;i<rows;i++)
+	{
+		a[i]=new int[cols]; 
+	}
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+	cleanArray(a,0,0,rows,cols);
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			cout<<a[i][j]<<' ';
+		}
+		cout<<endl;
+	}
+    return 0;
+}
+
