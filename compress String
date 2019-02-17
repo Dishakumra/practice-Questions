@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+
+void digitToCharater(int count , char *a , int* ptr)
+{
+  if(count < 9)
+  {
+    *(a+*(ptr)) = (char)count + '0';
+    (*ptr)++;
+  }
+  else
+  {
+    int b = count%10;
+    digitToCharater(count/10 , a , ptr);
+    *(a+*(ptr)) = (char)b + '0';
+    (*ptr)++;
+  }
+}
+
+void main()
+{
+int a;
+scanf("%d",&a);
+char str[a+1];
+scanf("%s",str);
+char cc;
+int count = 1;
+cc=str[0];
+int ind=0;
+for(int i=1 ; i<a+1 ; i++)
+{
+  if(cc != str[i])
+  {
+    str[ind] = cc;
+    cc = str[i];
+    ind++;
+    if(count > 9)
+    {
+      digitToCharater(count , str , &ind);
+      count = 1;
+      continue;
+    }
+    str[ind] = (char)count + '0' ;
+    ind++;
+    count = 1;
+  }
+  else
+  {
+    count++;
+  }
+}
+str[ind] = '\0';
+printf("%s",str);
+
+}
