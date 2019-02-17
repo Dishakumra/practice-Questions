@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+void printSpiral(int **a,int m,int n)
+{
+	int i,top=0,bottom=m,left=0,right=n;
+	while(top<bottom && left<right)
+	{
+		for(i=left;i<right;i++)
+		{
+			cout<<a[top][i]<<' ';
+		}
+		//cout<<endl;
+		top++;
+		for(i=top;i<bottom;i++)
+		{
+			cout<<a[i][right-1]<<' ';
+		}
+		//cout<<endl;
+		right--;
+		if(top<bottom)
+		{
+			for(i=right-1;i>=left;i--)
+			{
+				cout<<a[bottom-1][i]<<' ';
+			}
+			bottom--;
+		}
+		//cout<<endl;
+		if(left<right)
+		{
+			for(i=bottom-1;i>=top;i--)
+			{
+				cout<<a[i][left]<<' ';
+			}
+			left++;
+		}
+	}
+}
+int main()
+{
+	int m,n;
+	cout<<"ENTER NO. OF ROWS AND COLS : ";
+	cin>>m>>n;
+	int **a=new int*[m];
+	for(int i=0;i<m;i++)
+	{
+		a[i]=new int[n];
+	}
+	cout<<"ENTER ELEMENTS IN ARRAY:"<<endl;
+	for(int i=0;i<m;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+	cout<<"SPIRAL ORDER : "<<endl;
+	printSpiral(a,m,n);
+    return 0;
+}
