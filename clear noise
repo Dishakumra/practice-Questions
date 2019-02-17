@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+void removeNoise(int **a,int rows,int cols)
+{
+	int col[rows];
+    int k = -1;
+    int num[10];
+    int flag;
+    for (int i = 0; i < rows; i++) 
+	{
+        flag = 0;
+        for (int j = 0; j < cols; j++) 
+		{
+            if (a[i][j] == 0) 
+			{
+                col[j] = 1;
+                if (flag == 0)
+                    num[++k] = i;
+                flag++;
+            }
+        }
+    }
+    for (int i = 0; i < cols; i++) 
+	{
+        if (col[i] == 1) {
+            for (int j = 0; j < rows; j++) 
+			{
+                a[j][i] = 0;
+            }
+        }
+    }
+    for (int i = 0; i <= k; i++) 
+	{
+        for (int j = 0; j < cols; j++)
+            a[num[i]][j] = 0;
+    }
+}
+int main() 
+{
+    int  rows,cols;
+    cin >> rows >> cols;
+    int **a=new int*[rows];
+    for(int i=0;i<rows;i++)
+    {
+    	a[i]=new int[cols];
+	}
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            cin >> a[i][j];
+    removeNoise(a,rows,cols);
+    for (int i = 0; i < rows; i++) 
+	{
+        for (int j = 0; j < cols; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+}
